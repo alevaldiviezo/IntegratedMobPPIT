@@ -1,6 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, StyleSheet, Button, Text } from 'react-native';
+import { Audio } from 'expo-av';
+
+let recording = new Audio.Recording();
+
+export default function App() {
+  const [RecordedURI, SetRecordedURI] = useState('');
+  const [AudioPerm, SetAudioPerm] = useState(false);
+  const [isRecording, SetisRecording] = useState(false);
+  const [isPLaying, SetisPLaying] = useState(false);
+  const Player = useRef(new Audio.Sound());
 
 export default function App() {
   return (
