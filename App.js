@@ -35,6 +35,24 @@ export default function App() {
     SetRecordedURI(uri);
     console.log('Recording stopped and stored at', uri);
   }
+  
+  async function playSound() {
+    console.log('Loading Sound');
+    const { sound } = await Audio.Sound.createAsync(
+       {uri: RecordedURI} 
+    );
+    setSound(sound);
+
+    console.log('Playing Sound');
+    await sound.playAsync(); }
+
+  React.useEffect(() => {
+    return sound
+      ? () => {
+          console.log('Unloading Sound');
+          sound.unloadAsync(); }
+      : undefined;
+  }, [sound]);
 
   return (
     <View style={styles.container}>
