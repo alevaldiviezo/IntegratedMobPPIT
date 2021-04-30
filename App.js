@@ -26,9 +26,24 @@ export default function App() {
       console.error('Failed to start recording', err);
     }
   }
+  
+  async function stopRecording() {
+    console.log('Stopping recording..');
+    setRecording(undefined);
+    await recording.stopAndUnloadAsync();
+    const uri = recording.getURI(); 
+    SetRecordedURI(uri);
+    console.log('Recording stopped and stored at', uri);
+  }
 
   return (
     <View style={styles.container}>
+    
+      <Button
+        title={recording ? 'Stop Recording' : 'Start Recording'}
+        onPress={recording ? stopRecording : startRecording}
+      />
+      {/* after we put here a button to play the recording */}
       <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
     </View>
